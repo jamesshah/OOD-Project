@@ -25,9 +25,19 @@ public class StudentFactory extends PersonFactory{
 		return studentFactoryInstance;
 	}
 
-	public Person getObject(String firstName, String lastName, Date dateOfBirth, int age, int studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
-			String guardianPhoneNumber, String guardianAdress, int grade) {		
-		return new Student(firstName, lastName, dateOfBirth, age, studentId, registrationDate, address, guardianName, guardianEmail, guardianPhoneNumber, guardianAdress, grade);
+	public Person getObject(String firstName, String lastName, Date dateOfBirth, int age, String studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
+			String guardianPhoneNumber, String guardianAdress) {		
+		return new Student(firstName, 
+							lastName, 
+							dateOfBirth, 
+							age, 
+							studentId, 
+							registrationDate, 
+							address, 
+							guardianName, 
+							guardianEmail, 
+							guardianPhoneNumber, 
+							guardianAdress);
 	}
 
 	@Override

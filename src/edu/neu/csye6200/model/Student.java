@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Student extends Person{
 	
-	private int studentId;
+	private String studentId;
 	private Date registrationDate;
 	private String address;
 	private String guardianName;
@@ -19,8 +19,8 @@ public class Student extends Person{
 	private String guardianAdress;
 	private int grade;
 	
-	public Student(String firstName, String lastName, Date dateOfBirth, int age, int studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
-			String guardianPhoneNumber, String guardianAdress, int grade) {
+	public Student(String firstName, String lastName, Date dateOfBirth, int age, String studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
+			String guardianPhoneNumber, String guardianAdress) {
 		
 		super(firstName, lastName, dateOfBirth, age);
 		this.studentId = studentId;
@@ -30,7 +30,6 @@ public class Student extends Person{
 		this.guardianEmail = guardianEmail;
 		this.guardianPhoneNumber = guardianPhoneNumber;
 		this.guardianAdress = guardianAdress;
-		this.grade = grade;
 	}
 	
 	public Student(String csvData) {		
@@ -39,21 +38,20 @@ public class Student extends Person{
 				csvData.split(",")[1],
 				Helper.getDateFromString(csvData.split(",")[2]), 
 				Integer.parseInt(csvData.split(",")[3]),
-				Integer.parseInt(csvData.split(",")[4]),
+				csvData.split(",")[4],
 				Helper.getDateFromString(csvData.split(",")[5]),
 				csvData.split(",")[6],
 				csvData.split(",")[7],
 				csvData.split(",")[8],
 				csvData.split(",")[9],
-				csvData.split(",")[10],
-				Integer.parseInt(csvData.split(",")[11])
+				csvData.split(",")[10]
 			);		
 	}
 	
-	public int getStudentId() {
+	public String getStudentId() {
 		return studentId;
 	}
-	public void setStudentId(int studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 	public Date getRegistrationDate() {
