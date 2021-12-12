@@ -11,7 +11,7 @@ public class Helper {
 		try {
 			return dateFormat.parse(dateString);
 		} catch (ParseException e) {
-			System.err.println("Please provide Date in dd/MM/yyyy format only.");
+			System.err.println("Please provide Date in MM/dd/yyyy format only.");
 			e.printStackTrace();
 		}
 		return null;
