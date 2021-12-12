@@ -8,34 +8,49 @@ import java.util.Date;
  *
  */
 public abstract class Person {
-	private String name;
+	private String firstName;
+	private String lastName;
 	private Date dateOfBirth;
 	private int age;
 	
 	public Person() {}
 	
-	public Person(String name, Date dateOfBirth, int age) {
+	public Person(String firstName, String lastName, Date dateOfBirth, int age) {
 		super();
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.age = age;
 	}
-	
-	public String getName() {
-		return name;
+		
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
+	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+	
 	public int getAge() {
 		return age;
 	}
+	
 	public void setAge(int age) {
 		this.age = age;
 	}	
