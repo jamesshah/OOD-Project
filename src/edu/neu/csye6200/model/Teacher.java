@@ -2,7 +2,7 @@ package edu.neu.csye6200.model;
 
 import java.util.Date;
 
-import edu.neu.csye6200.Helper;
+import edu.neu.csye6200.util.Helper;
 
 /**
  * Concrete Teacher class inherited from abstract Person class
