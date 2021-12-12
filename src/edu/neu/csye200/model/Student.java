@@ -1,5 +1,6 @@
-package edu.neu.csye6200;
+package edu.neu.csye200.model;
 
+import edu.neu.csye6200.Helper;
 import java.util.Date;
 
 /**
