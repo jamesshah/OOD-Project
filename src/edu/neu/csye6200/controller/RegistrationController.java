@@ -2,7 +2,7 @@ package edu.neu.csye6200.controller;
 
 import java.util.UUID;
 
-import edu.neu.csye6200.Helper;
+import edu.neu.csye6200.util.Helper;
 import edu.neu.csye6200.util.StudentFactory;
 
 public class RegistrationController {
