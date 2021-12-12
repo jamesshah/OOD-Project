@@ -1,0 +1,109 @@
+package edu.neu.csye6200;
+
+import java.util.Date;
+
+/**
+ * Concrete Student class inherited by abstract Person class.
+ * @author james
+ *
+ */
+public class Student extends Person{
+	
+	private int studentId;
+	private Date registrationDate;
+	private String address;
+	private String guardianName;
+	private String guardianEmail;
+	private String guardianPhoneNumber; 
+	private String guardianAdress;
+	private int grade;
+	
+	public Student(String name, Date dateOfBirth, int age, int studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
+			String guardianPhoneNumber, String guardianAdress, int grade) {
+		
+		super(name, dateOfBirth, age);
+		this.studentId = studentId;
+		this.registrationDate = registrationDate;
+		this.address = address;
+		this.guardianName = guardianName;
+		this.guardianEmail = guardianEmail;
+		this.guardianPhoneNumber = guardianPhoneNumber;
+		this.guardianAdress = guardianAdress;
+		this.grade = grade;
+	}
+	
+	public Student(String csvData) {		
+		this(
+				csvData.split(",")[0], 
+				Helper.getDateFromString(csvData.split(",")[1]), 
+				Integer.parseInt(csvData.split(",")[2]),
+				Integer.parseInt(csvData.split(",")[3]),
+				Helper.getDateFromString(csvData.split(",")[4]),
+				csvData.split(",")[5],
+				csvData.split(",")[6],
+				csvData.split(",")[7],
+				csvData.split(",")[8],
+				csvData.split(",")[9],
+				Integer.parseInt(csvData.split(",")[10])
+			);		
+	}
+	
+	public int getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getGuardianName() {
+		return guardianName;
+	}
+	public void setGuardianName(String guardianName) {
+		this.guardianName = guardianName;
+	}
+	public String getGuardianEmail() {
+		return guardianEmail;
+	}
+	public void setGuardianEmail(String guardianEmail) {
+		this.guardianEmail = guardianEmail;
+	}
+	public String getGuardianPhoneNumber() {
+		return guardianPhoneNumber;
+	}
+	public void setGuardianPhoneNumber(String guardianPhoneNumber) {
+		this.guardianPhoneNumber = guardianPhoneNumber;
+	}
+	public String getGuardianAdress() {
+		return guardianAdress;
+	}
+	public void setGuardianAdress(String guardianAdress) {
+		this.guardianAdress = guardianAdress;
+	}
+		
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", name= " + this.getName() + ", dateOfBirth= " + this.getDateOfBirth() + ", age= " + this.getAge() +  ", registrationDate=" + registrationDate + ", address=" + address
+				+ ", guardianName=" + guardianName + ", guardianEmail=" + guardianEmail + ", guardianPhoneNumber="
+				+ guardianPhoneNumber + ", guardianAdress=" + guardianAdress + ", grade=" + grade + "]";
+	}	
+
+}
