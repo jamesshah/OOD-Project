@@ -2,6 +2,8 @@ package edu.neu.csye6200.model;
 
 import java.util.Date;
 
+import edu.neu.csye6200.Helper;
+
 /**
  * Concrete Teacher class inherited from abstract Person class
  * @author james
@@ -16,8 +18,8 @@ public class Teacher extends Person{
 	private String email;
 	private int credits;
 	
-	public Teacher(String name, Date dateOfBirth, int age, int employeeId, Date joiningDate, String address, String phoneNumber, String email, int credits) {		
-		super(name, dateOfBirth, age);
+	public Teacher(String firstName, String lastName, Date dateOfBirth, int age, int employeeId, Date joiningDate, String address, String phoneNumber, String email, int credits) {		
+		super(firstName, lastName, dateOfBirth, age);
 		this.employeeId = employeeId;
 		this.joiningDate = joiningDate;
 		this.address = address;
@@ -26,7 +28,20 @@ public class Teacher extends Person{
 		this.credits = credits;
 	}
 	
-	
+	public Teacher(String csvData) {		
+		this(
+				csvData.split(",")[0],
+				csvData.split(",")[1],
+				Helper.getDateFromString(csvData.split(",")[2]), 
+				Integer.parseInt(csvData.split(",")[3]),
+				Integer.parseInt(csvData.split(",")[4]),
+				Helper.getDateFromString(csvData.split(",")[5]),
+				csvData.split(",")[6],
+				csvData.split(",")[7],
+				csvData.split(",")[8],
+				Integer.parseInt(csvData.split(",")[9])
+			);		
+	}
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -78,7 +93,7 @@ public class Teacher extends Person{
 
 	@Override
 	public String toString() {
-		return "Teacher [employeeId=" + employeeId + ", name= " + this.getName() + ", dateOfBirth= " + this.getDateOfBirth() + ", age= " + this.getAge() + ", joiningDate=" + joiningDate + ", address=" + address
+		return "Teacher [employeeId=" + employeeId + ", firstName= " + this.getFirstName() + ", lastName= " + this.getLastName()+ ", firstName= " + this.getFirstName() + ", lastName= " + this.getLastName() + ", dateOfBirth= " + this.getDateOfBirth() + ", age= " + this.getAge() + ", joiningDate=" + joiningDate + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", credits=" + credits + "]";
 	}		
 

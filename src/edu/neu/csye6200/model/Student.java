@@ -19,10 +19,10 @@ public class Student extends Person{
 	private String guardianAdress;
 	private int grade;
 	
-	public Student(String name, Date dateOfBirth, int age, int studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
+	public Student(String firstName, String lastName, Date dateOfBirth, int age, int studentId, Date registrationDate, String address, String guardianName, String guardianEmail,
 			String guardianPhoneNumber, String guardianAdress, int grade) {
 		
-		super(name, dateOfBirth, age);
+		super(firstName, lastName, dateOfBirth, age);
 		this.studentId = studentId;
 		this.registrationDate = registrationDate;
 		this.address = address;
@@ -35,17 +35,18 @@ public class Student extends Person{
 	
 	public Student(String csvData) {		
 		this(
-				csvData.split(",")[0], 
-				Helper.getDateFromString(csvData.split(",")[1]), 
-				Integer.parseInt(csvData.split(",")[2]),
+				csvData.split(",")[0],
+				csvData.split(",")[1],
+				Helper.getDateFromString(csvData.split(",")[2]), 
 				Integer.parseInt(csvData.split(",")[3]),
-				Helper.getDateFromString(csvData.split(",")[4]),
-				csvData.split(",")[5],
+				Integer.parseInt(csvData.split(",")[4]),
+				Helper.getDateFromString(csvData.split(",")[5]),
 				csvData.split(",")[6],
 				csvData.split(",")[7],
 				csvData.split(",")[8],
 				csvData.split(",")[9],
-				Integer.parseInt(csvData.split(",")[10])
+				csvData.split(",")[10],
+				Integer.parseInt(csvData.split(",")[11])
 			);		
 	}
 	
@@ -102,9 +103,9 @@ public class Student extends Person{
 
 	@Override
 	public String toString() {
-		return "Student [studentId=" + studentId + ", name= " + this.getName() + ", dateOfBirth= " + this.getDateOfBirth() + ", age= " + this.getAge() +  ", registrationDate=" + registrationDate + ", address=" + address
+		return "Student [studentId=" + studentId + ", firstName= " + this.getFirstName() + ", lastName= " + this.getLastName() + ", dateOfBirth= " + this.getDateOfBirth() + ", age= " + this.getAge() +  ", registrationDate=" + registrationDate + ", address=" + address
 				+ ", guardianName=" + guardianName + ", guardianEmail=" + guardianEmail + ", guardianPhoneNumber="
 				+ guardianPhoneNumber + ", guardianAdress=" + guardianAdress + ", grade=" + grade + "]";
-	}	
-
+	}
+	
 }
