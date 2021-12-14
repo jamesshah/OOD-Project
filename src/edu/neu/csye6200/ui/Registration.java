@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
@@ -217,10 +218,24 @@ public class Registration extends javax.swing.JFrame{
         pack();
     }// </editor-fold>                        
 
-    private void clickedEnrollStudent(java.awt.event.ActionEvent evt) {                                         
-    	controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
+    private void clickedEnrollStudent(java.awt.event.ActionEvent evt) {
+    	
+    	if(!controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
     			dob.getText(), address.getText(), grdFName.getText(), grdLName.getText(),
-    			email.getText(), phone.getText(), regDate.getDateFormatString());
+    			email.getText(), phone.getText(), regDate.getDateFormatString())) {
+    		JOptionPane.showMessageDialog(this, "An error occurred while enorlling the student", "ERROR!", JOptionPane.ERROR_MESSAGE);
+    	}
+    	
+    	JOptionPane.showMessageDialog(this, "Student enrolled successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+    	fName.setText("");
+    	lName.setText("");
+    	age.setText("");
+    	dob.setText("");
+    	address.setText("");
+    	grdFName.setText("");
+    	grdLName.setText("");
+    	email.setText("");
+    	phone.setText("");
     }
 
     private void fNameActionPerformed(java.awt.event.ActionEvent evt) {                                            

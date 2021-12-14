@@ -1,6 +1,14 @@
 package edu.neu.csye6200.ui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import org.bson.Document;
+
+import com.mongodb.client.MongoCollection;
+import static com.mongodb.client.model.Filters.eq;
+
+import edu.neu.csye6200.util.DBConn;
 
 public class Login extends javax.swing.JFrame {
 
@@ -175,32 +183,50 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_teacherActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-    	if(admin.isSelected()) {
+            	
+    	// Login credential validation and logging in process.
+    	
+    	MongoCollection<Document> collection = DBConn.getInstance().getCollection("Credentials");    	
+    	
+    	if(usernameTF.getText().equals("") || passwordTF.getText().equals("")) {
+    		JOptionPane.showMessageDialog(this, "Please enter valid username and password", "ERROR!", JOptionPane.ERROR_MESSAGE);
+    	} else if(!admin.isSelected() && !student.isSelected() && !teacher.isSelected()) {
+    		JOptionPane.showMessageDialog(this, "Please select a role", "ERROR!", JOptionPane.ERROR_MESSAGE);
+    	} else if(admin.isSelected()) {    		
     		System.out.println("Admin selected");
     		
-    		if(usernameTF.getText().equals("admin") && passwordTF.getText().equals("admin")) {
+    		Document adminObj = collection.find(eq("id", "admin")).first();
+    		
+//    		System.out.println(doc.toJson());
+    		
+    		if(usernameTF.getText().equals(adminObj.get("username")) && passwordTF.getText().equals(adminObj.get("password"))) {
     			System.out.println("Admin access granted!");
-    			JFrame o = new Registration();
+    			JFrame o = new AdminView();
     			o.setVisible(true);
     			dispose();
-    		} else {
-    			System.out.println("Password Wrong");
-    		}
+    		} else 
+    			JOptionPane.showMessageDialog(this, "Username/password is incorrect", "ERROR!", JOptionPane.ERROR_MESSAGE);
+    		
     	} else if(student.isSelected()) {
-    		if(usernameTF.getText().equals("student") && passwordTF.getText().equals("student")) {
-    			System.out.println("Student access granted!");
+    		    		    		
+    		Document studentObj = collection.find(eq("username", usernameTF.getText())).first();
+    		System.out.println(studentObj == null);
+    		
+    		if(!(studentObj == null) && passwordTF.getText().equals(studentObj.get("password"))) {    			
+    				System.out.println("Student access granted!");    			
     		} else {
-    			System.out.println("Password Wrong!");
+    			JOptionPane.showMessageDialog(this, "Username/password is incorrect", "ERROR!", JOptionPane.ERROR_MESSAGE);
     		}
     	} else {
-    		if(usernameTF.getText().equals("teacher") && passwordTF.getText().equals("teacher")) {
-    			System.out.println("Teacher access granted!");
+    		Document teacherObj = collection.find(eq("username", usernameTF.getText())).first();
+    		
+    		if(!(teacherObj == null) && passwordTF.getText().equals(teacherObj.get("password"))) {    			
+				System.out.println("Teacher access granted!");
     		} else {
-    			System.out.println("Password Wrong!");
+    			JOptionPane.showMessageDialog(this, "Username/password is incorrect", "ERROR!", JOptionPane.ERROR_MESSAGE);
     		}
-    	}
-    	    	
+    	}    	
+    	    	    
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**

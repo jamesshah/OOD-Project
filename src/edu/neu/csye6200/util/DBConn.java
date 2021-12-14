@@ -35,6 +35,18 @@ public class DBConn {
 		
 		return dbConn;
 	}
+    
+    public MongoClient getClient() {
+    	return this.mongoClient;
+    }
+    
+    public MongoDatabase getDatabase() {
+    	return this.database;
+    }
+    
+    public MongoCollection<Document> getCollection(String collection) {
+    	return this.database.getCollection(collection);
+    }
 	
 	@Override
 	protected void finalize() throws Throwable {
