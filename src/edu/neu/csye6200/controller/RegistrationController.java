@@ -2,6 +2,7 @@ package edu.neu.csye6200.controller;
 
 import java.util.UUID;
 
+import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.util.Helper;
 import edu.neu.csye6200.util.StudentFactory;
 
@@ -11,9 +12,9 @@ public class RegistrationController {
 							final String address, final String grdFName, final String grdLName,
 							final String email, final String phone, final String regDate) {
 		
-		StudentFactory.getInstance().getObject(fName, lName, Helper.getDateFromString(dob), Integer.parseInt(age), UUID.randomUUID().toString(), Helper.getDateFromString(regDate), address, grdFName, email, phone, address);
+		Student student = (Student) StudentFactory.getInstance().getObject(fName, lName, Helper.getDateFromString(dob), Integer.parseInt(age), UUID.randomUUID().toString().replace("-", ""), Helper.getDateFromString(regDate), address, grdFName, email, phone, address);
 		
-		System.out.println("Clicked enroll student " + fName);
+		System.out.println("Enrolled : " + student);
 		
 	}
 

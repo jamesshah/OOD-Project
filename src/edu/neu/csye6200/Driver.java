@@ -1,6 +1,6 @@
 package edu.neu.csye6200;
 
-import edu.neu.csye6200.ui.Registration;
+import edu.neu.csye6200.ui.Login;
 
 public class Driver {
 
@@ -8,7 +8,7 @@ public class Driver {
 		
 		System.out.println("\t" + Driver.class.getName() + ".main()...");
 		
-		Registration.launch();
+		Login.launch();
 		
 		System.out.println("\t" + Driver.class.getName() + ".main()...Done!");
 
