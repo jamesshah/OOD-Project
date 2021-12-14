@@ -1,8 +1,11 @@
 package edu.neu.csye6200.ui;
 
+import java.util.Date;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 import edu.neu.csye6200.controller.RegistrationController;
 
@@ -42,7 +45,7 @@ public class Registration extends javax.swing.JFrame{
         grdLName = new JTextField();
         email = new JTextField();
         phone = new JTextField();
-        regDate = new JTextField();
+        regDate = new JDateChooser(new Date());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pre-school Day Care");
@@ -69,6 +72,8 @@ public class Registration extends javax.swing.JFrame{
         emailLbl.setText("Email:");
 
         phoneLbl.setText("Phone number:");
+        
+        regDate.setEnabled(false);
 
         enrollStudent.setText("Enroll Student");
         enrollStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +82,7 @@ public class Registration extends javax.swing.JFrame{
             }
         });
 
+        //fName.setInputVerifier(InputVerifier);
         fName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fNameActionPerformed(evt);
@@ -116,12 +122,6 @@ public class Registration extends javax.swing.JFrame{
         phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
-            }
-        });
-
-        regDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regDateActionPerformed(evt);
             }
         });
 
@@ -220,7 +220,7 @@ public class Registration extends javax.swing.JFrame{
     private void clickedEnrollStudent(java.awt.event.ActionEvent evt) {                                         
     	controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
     			dob.getText(), address.getText(), grdFName.getText(), grdLName.getText(),
-    			email.getText(), phone.getText(), regDate.getText());
+    			email.getText(), phone.getText(), regDate.getDateFormatString());
     }
 
     private void fNameActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -314,7 +314,7 @@ public class Registration extends javax.swing.JFrame{
     private JTextField grdLName;
     private JTextField email;
     private JTextField phone;
-    private JTextField regDate;
+    private JDateChooser regDate;
 	
 	public static void launch() {
 		java.awt.EventQueue.invokeLater(new Runnable() {

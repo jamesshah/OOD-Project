@@ -1,5 +1,7 @@
 package edu.neu.csye6200.ui;
 
+import javax.swing.JFrame;
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -179,6 +181,9 @@ public class Login extends javax.swing.JFrame {
     		
     		if(usernameTF.getText().equals("admin") && passwordTF.getText().equals("admin")) {
     			System.out.println("Admin access granted!");
+    			JFrame o = new Registration();
+    			o.setVisible(true);
+    			dispose();
     		} else {
     			System.out.println("Password Wrong");
     		}
