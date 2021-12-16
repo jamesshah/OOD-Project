@@ -213,8 +213,9 @@ public class Login extends javax.swing.JFrame {
     		System.out.println(studentObj == null);
     		
     		if(!(studentObj == null) && passwordTF.getText().equals(studentObj.get("password"))) {    			
+//    				System.out.println(studentObj.get("_id"));
     				System.out.println("Student access granted!");
-    				JFrame o = new StudentLoginView();
+    				JFrame o = new StudentLoginView(studentObj.get("id").toString());
         			o.setVisible(true);
         			dispose();
     		} else {
