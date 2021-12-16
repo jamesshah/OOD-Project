@@ -1,4 +1,6 @@
 package edu.neu.csye6200.ui;
+import static com.mongodb.client.model.Filters.eq;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,17 +13,28 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.bson.Document;
+
+import com.mongodb.client.MongoCollection;
+
+import edu.neu.csye6200.util.DBConn;
 
 /**
  *
  * @author pranotidhabu
  */
 public class StudentLoginView extends javax.swing.JFrame {
+	
+	private MongoCollection<Document> collection = DBConn.getInstance().getCollection("Students");
+	private Document studentObj; 
 
     /**
      * Creates new form StudentLoginView
      */
-    public StudentLoginView() {
+    public StudentLoginView(String studentId) {
+//    	MongoCollection<Document> collection = DBConn.getInstance().getCollection("Credentials");
+//    	Document studentObj = collection.find(eq("id", "admin")).first();
+    	this.studentObj = collection.find(eq("studentId", studentId)).first();
         initComponents();
     }
 
@@ -113,7 +126,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         studentName.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         studentName.setForeground(new java.awt.Color(255, 0, 0));
-        studentName.setText("studentName");
+        studentName.setText(this.studentObj.get("lastName").toString()  + "," + this.studentObj.get("firstName").toString());
 
         deadlinesLbl.setText("Upcoming deadlines");
 
@@ -217,17 +230,17 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         addressLbl.setText("Address:");
 
-        studentID.setText("studentID");
+        studentID.setText(this.studentObj.get("studentId").toString());
 
-        firstName.setText("firstName");
+        firstName.setText(this.studentObj.get("firstName").toString());
 
-        lastName.setText("lastName");
+        lastName.setText(this.studentObj.get("lastName").toString());
 
-        dob.setText("dob");
+        dob.setText(this.studentObj.get("firstName").toString());
 
-        age.setText("age");
+        age.setText(this.studentObj.get("age").toString());
 
-        address.setText("address");
+        address.setText(this.studentObj.get("age").toString());
 
         grdFNameLbl.setText("Guardian First Name:");
 
@@ -239,15 +252,15 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         regDateLbl.setText("Registration date:");
 
-        regDate.setText("regDate");
+        regDate.setText(this.studentObj.get("registrationDate").toString());
 
-        email.setText("email");
+        email.setText(this.studentObj.get("guardianEmail").toString());
 
-        grdLName.setText("grdLName");
+        grdLName.setText(this.studentObj.get("guardianLastName").toString());
 
-        phone.setText("phone");
+        phone.setText(this.studentObj.get("guardianPhoneNumber").toString());
 
-        grdFName.setText("grdFName");
+        grdFName.setText(this.studentObj.get("guardianFirstName").toString());
 
         grdDetailsLbl.setText("Guardian details:");
 
@@ -506,7 +519,7 @@ public class StudentLoginView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentLoginView().setVisible(true);
+                new StudentLoginView("").setVisible(true);
             }
         });
     }
