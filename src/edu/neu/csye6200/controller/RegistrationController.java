@@ -36,7 +36,7 @@ public class RegistrationController {
 		if(group == "Invalid age" || group == "")
 			return false;			
 					
-		String randomStudentId = UUID.randomUUID().toString();
+		String randomStudentId = "student" + UUID.randomUUID().toString();
 		Document student = 
 				new Document("firstName", fName)
 				.append("lastName", lName)

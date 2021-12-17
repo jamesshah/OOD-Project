@@ -2,6 +2,9 @@ package edu.neu.csye6200.ui;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
 
@@ -32,6 +36,7 @@ public class TeacherLoginView extends javax.swing.JFrame {
 	
 	private MongoCollection<Document> collection = DBConn.getInstance().getCollection("Teachers");
 	private MongoCollection<Document> groupsCollection = DBConn.getInstance().getCollection("Groups");
+	private MongoCollection<Document> studentsCollection = DBConn.getInstance().getCollection("Students");
 	private Document teacherObj;
 	private Document groupObj;
 
@@ -316,12 +321,7 @@ public class TeacherLoginView extends javax.swing.JFrame {
         jTabbedPane1.addTab("Account Info", accInfoPanel);
 
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "First Name", "Last Name"
             }
@@ -341,11 +341,25 @@ public class TeacherLoginView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        DefaultTableModel table = (DefaultTableModel) studentTable.getModel();
+        
+        Document doc = groupsCollection.find(eq("teacher", teacherObj.get("employeeId", ""))).first();
+        	                       
+        ArrayList<String> studentsId = (ArrayList<String>) doc.get("students");
+        
+        System.out.println(doc.get("students"));
+        for(String id: studentsId) {
+        	Document studentsDoc = studentsCollection.find(eq("studentId", id)).first();
+        	String student[] = {studentsDoc.get("firstName", ""), studentsDoc.get("lastName", "")};
+        	table.addRow(student);
+        }
+        
         jScrollPane1.setViewportView(studentTable);
 
         clsRoomLbl.setText("Classroom:");
 
-        clsRoom.setText("clsRoom");
+        clsRoom.setText(teacherObj.get("classroomId", ""));
 
         studentsLbl.setText("Students:");
 

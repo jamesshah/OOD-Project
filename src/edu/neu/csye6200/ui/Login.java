@@ -7,6 +7,7 @@ import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.and;
 
 import edu.neu.csye6200.util.DBConn;
 
@@ -212,7 +213,7 @@ public class Login extends javax.swing.JFrame {
     	} else if(admin.isSelected()) {    		
     		System.out.println("Admin selected");
     		
-    		Document adminObj = collection.find(eq("id", "admin")).first();
+    		Document adminObj = collection.find(and(eq("id", "admin"))).first();
     		
 //    		System.out.println(doc.toJson());
     		
@@ -226,8 +227,7 @@ public class Login extends javax.swing.JFrame {
     		
     	} else if(student.isSelected()) {
     		    		    		
-    		Document studentObj = collection.find(eq("username", usernameTF.getText())).first();
-    		System.out.println(studentObj == null);
+    		Document studentObj = collection.find(and(eq("username", usernameTF.getText()), eq("role", "student"))).first();    		
     		
     		if(!(studentObj == null) && passwordTF.getText().equals(studentObj.get("password"))) {    			
 //    				System.out.println(studentObj.get("_id"));
@@ -239,7 +239,7 @@ public class Login extends javax.swing.JFrame {
     			JOptionPane.showMessageDialog(this, "Username/password is incorrect", "ERROR!", JOptionPane.ERROR_MESSAGE);
     		}
     	} else {
-    		Document teacherObj = collection.find(eq("username", usernameTF.getText())).first();
+    		Document teacherObj = collection.find(and(eq("username", usernameTF.getText()), eq("role", "teacher"))).first();
     		
     		if(!(teacherObj == null) && passwordTF.getText().equals(teacherObj.get("password"))) {    			
 				System.out.println("Teacher access granted!");
