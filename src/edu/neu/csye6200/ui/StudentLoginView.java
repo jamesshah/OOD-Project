@@ -1,17 +1,25 @@
 package edu.neu.csye6200.ui;
 import static com.mongodb.client.model.Filters.eq;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 import org.bson.Document;
 
@@ -56,7 +64,7 @@ public class StudentLoginView extends javax.swing.JFrame {
         welcomeLbl = new JLabel();
         studentName = new JLabel();
         deadlinesLbl = new JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLayeredPane1 = new JLayeredPane();
         titleLbl1 = new JLabel();
         titleLbl2 = new JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -74,16 +82,13 @@ public class StudentLoginView extends javax.swing.JFrame {
         age = new JLabel();
         address = new JLabel();
         grdFNameLbl = new JLabel();
-        grdLNameLbl = new JLabel();
         emailLbl = new JLabel();
         phoneLbl = new JLabel();
         regDateLbl = new JLabel();
         regDate = new JLabel();
         email = new JLabel();
-        grdLName = new JLabel();
         phone = new JLabel();
         grdFName = new JLabel();
-        grdDetailsLbl = new JLabel();
         classInfoPanel = new JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         classmatesTable = new JTable();
@@ -123,7 +128,6 @@ public class StudentLoginView extends javax.swing.JFrame {
             }
         });
 
-        //welcomeLbl.setBackground(new java.awt.Color(255, 255, 255));
         welcomeLbl.setText("Welcome");
 
         studentName.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -138,8 +142,8 @@ public class StudentLoginView extends javax.swing.JFrame {
         titleLbl2.setFont(new java.awt.Font("Marker Felt", 0, 28)); // NOI18N
         titleLbl2.setText("DAY CARE");
 
-        jLayeredPane1.setLayer(titleLbl1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(titleLbl2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(titleLbl1, JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(titleLbl2, JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -244,9 +248,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         address.setText(this.studentObj.get("age").toString());
 
-        grdFNameLbl.setText("Guardian First Name:");
-
-        grdLNameLbl.setText("Guardian Last Name:");
+        grdFNameLbl.setText("Guardian Name:");
 
         emailLbl.setText("Email:");
 
@@ -258,15 +260,11 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         email.setText(this.studentObj.get("guardianEmail").toString());
 
-        grdLName.setText(this.studentObj.get("guardianLastName", "").toString());
-
         phone.setText(this.studentObj.get("guardianPhoneNumber", "").toString());
 
-        grdFName.setText(this.studentObj.get("guardianFirstName", "").toString());
+        grdFName.setText(this.studentObj.get("guardianName", "").toString());
 
-        grdDetailsLbl.setText("Guardian details:");
-
-        javax.swing.GroupLayout accInfoPanelLayout = new javax.swing.GroupLayout(accInfoPanel);
+        GroupLayout accInfoPanelLayout = new GroupLayout(accInfoPanel);
         accInfoPanel.setLayout(accInfoPanelLayout);
         accInfoPanelLayout.setHorizontalGroup(
             accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,9 +284,7 @@ public class StudentLoginView extends javax.swing.JFrame {
                                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(firstName)
                                     .addGroup(accInfoPanelLayout.createSequentialGroup()
-                                        .addComponent(studentID)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                        .addComponent(regDateLbl))))
+                                        .addComponent(studentID))))
                             .addGroup(accInfoPanelLayout.createSequentialGroup()
                                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lastNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,19 +302,15 @@ public class StudentLoginView extends javax.swing.JFrame {
                                     .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(accInfoPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(grdLNameLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grdLName))
-                    .addGroup(accInfoPanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(grdFNameLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(grdFName))
-                    .addGroup(accInfoPanelLayout.createSequentialGroup()
+                	.addGroup(accInfoPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(grdDetailsLbl)))
+                        .addComponent(regDateLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(regDate)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(regDate)
                 .addGap(17, 17, 17))
         );
         accInfoPanelLayout.setVerticalGroup(
@@ -327,9 +319,7 @@ public class StudentLoginView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(studentIDLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(studentID)
-                    .addComponent(regDateLbl)
-                    .addComponent(regDate))
+                    .addComponent(studentID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,16 +348,15 @@ public class StudentLoginView extends javax.swing.JFrame {
                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl)
                     .addComponent(phone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(grdDetailsLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(grdFNameLbl)
                     .addComponent(grdFName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(accInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(grdLNameLbl)
-                    .addComponent(grdLName))
+                    .addComponent(regDateLbl)
+                    .addComponent(regDate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGap(91, 91, 91))
         );
 
@@ -494,7 +483,7 @@ public class StudentLoginView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void launch(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -534,13 +523,11 @@ public class StudentLoginView extends javax.swing.JFrame {
     private JLabel age;
     private JLabel address;
     private JLabel grdFNameLbl;
-    private JLabel grdLNameLbl;
     private JLabel emailLbl;
     private JLabel phoneLbl;
     private JLabel regDateLbl;
     private JLabel regDate;
     private JLabel email;
-    private JLabel grdLName;
     private JLabel studentName;
     private JLabel phone;
     private JLabel grdFName;
@@ -549,7 +536,6 @@ public class StudentLoginView extends javax.swing.JFrame {
     private JLabel teacherLbl;
     private JLabel teacher;
     private JLabel clsmatesLbl;
-    private JLabel grdDetailsLbl;
     private JLabel deadlinesLbl;
     private JLabel titleLbl1;
     private JLabel titleLbl2;
@@ -557,7 +543,7 @@ public class StudentLoginView extends javax.swing.JFrame {
     private JLabel firstName;
     private JLabel lastName;
     private JLabel dob;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private JLayeredPane jLayeredPane1;
     private JPanel sidePanel;
     private JPanel immuneRecPanel;
     private JPanel classInfoPanel;
