@@ -9,7 +9,7 @@ package edu.neu.csye6200.ui;
  *
  * @author santo
  */
-public class Immunization extends javax.swing.JFrame {
+public class Immunization extends javax.swing.JDialog {
 
     /**
      * Creates new form Immunization
@@ -38,7 +38,7 @@ public class Immunization extends javax.swing.JFrame {
         lblDose3 = new javax.swing.JLabel();
         txtDose3 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setText("Immunizations");
 
