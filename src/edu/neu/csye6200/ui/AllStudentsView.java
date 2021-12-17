@@ -81,17 +81,17 @@ public class AllStudentsView extends javax.swing.JFrame {
         
         
         for(Document student : students) {
-        	String fName = student.get("firstName").toString();
-        	String lName = student.get("lastName").toString();
-        	String dateOfBirth = student.get("dateOfBirth").toString();
-        	String age = student.get("age").toString();
-        	String studentId = student.get("studentId").toString();
-        	String registrationDate = student.get("registrationDate").toString();
-        	String address = student.get("address").toString();
-        	String guardianName = student.get("guardianName").toString();
-        	String guardianPhone = student.get("guardianPhoneNumber").toString();
-        	String guardianEmail = student.get("guardianEmail").toString();
-        	String guardianAddress = student.get("guardianAddress").toString();
+        	String fName = student.get("firstName", "").toString();
+        	String lName = student.get("lastName", "").toString();
+        	String dateOfBirth = student.get("dateOfBirth", "").toString();
+        	String age = student.get("age", 0).toString();
+        	String studentId = student.get("studentId", "").toString();
+        	String registrationDate = student.get("registrationDate", "").toString();
+        	String address = student.get("address", "").toString();
+        	String guardianName = student.get("guardianName", "").toString();
+        	String guardianPhone = student.get("guardianPhoneNumber", "").toString();
+        	String guardianEmail = student.get("guardianEmail", "").toString();
+        	String guardianAddress = student.get("guardianAddress", "").toString();
         	
         	Object[] row = {fName, lName, dateOfBirth, age, studentId, registrationDate, address, guardianName, guardianEmail, guardianPhone, guardianAddress};
         	tableModel.addRow(row);

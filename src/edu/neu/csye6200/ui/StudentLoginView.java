@@ -135,7 +135,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         studentName.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         studentName.setForeground(new java.awt.Color(255, 0, 0));
-        studentName.setText(this.studentObj.get("lastName").toString()  + "," + this.studentObj.get("firstName").toString());
+        studentName.setText(this.studentObj.get("lastName").toString()  + ", " + this.studentObj.get("firstName").toString());
 
         deadlinesLbl.setText("Upcoming deadlines");
 
@@ -249,7 +249,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 
       age.setText(this.studentObj.get("age").toString());
 
-      address.setText(this.studentObj.get("age").toString());
+      address.setText(this.studentObj.get("address").toString());
 
       grdFNameLbl.setText("Guardian First Name:");
 
