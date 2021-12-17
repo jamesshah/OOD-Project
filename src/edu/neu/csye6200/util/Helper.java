@@ -31,17 +31,17 @@ public class Helper {
 		MongoCollection<Document> collection = DBConn.getInstance().getCollection("Groups");
 		
 		if(ageInt >= 6 && ageInt <= 12) {						
-			return "06-12-0" + new Random().nextInt(3);
+			return "06-12-0" + (new Random().nextInt(3) + 1);
 		} else if(ageInt >= 13 && ageInt <= 24) {			
-			return "13-24-0" + new Random().nextInt(5);
+			return "13-24-0" + (new Random().nextInt(3) + 1);
 		} else if(ageInt >= 25 && ageInt <= 35) {
-			return "25-35-0" + new Random().nextInt(6);
+			return "25-35-0" + (new Random().nextInt(3) + 1);
 		} else if(ageInt >= 36 && ageInt <= 47) {
-			return "36-47-0" + new Random().nextInt(8);
+			return "36-47-0" + (new Random().nextInt(3) + 1);
 		} else if(ageInt >= 48 && ageInt <= 59) {
-			return "48-59-0" + new Random().nextInt(12);
+			return "48-59-0" + (new Random().nextInt(2) + 1);
 		} else if(ageInt >= 60) {			
-			return "60-0" + new Random().nextInt(15);
+			return "60-0" + (new Random().nextInt(2) + 1);
 		} else {
 			return "Invalid age";
 		}

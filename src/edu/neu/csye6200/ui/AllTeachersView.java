@@ -78,7 +78,7 @@ public class AllTeachersView extends javax.swing.JFrame {
         	String fName = teacher.get("firstName").toString();
         	String lName = teacher.get("lastName").toString();        	
         	String age = teacher.get("age").toString();
-        	String employeeId = teacher.get("employeeId").toString();        	
+        	String employeeId = teacher.get("employeeId").toString();
         	String address = teacher.get("address").toString();        	
         	String phoneNumber = teacher.get("phoneNumber").toString();
         	String emailAddress = teacher.get("emailAddress").toString();
