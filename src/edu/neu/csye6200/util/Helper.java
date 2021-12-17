@@ -13,15 +13,9 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class Helper {	
 	
-	public static Date getDateFromString(String dateString) {
-		SimpleDateFormat dateFormat =new SimpleDateFormat("MM/dd/yyyy");
-		try {
-			return dateFormat.parse(dateString);
-		} catch (ParseException e) {
-			System.err.println("Please provide Date in MM/dd/yyyy format only.");
-			e.printStackTrace();
-		}
-		return null;
+	public static Date getDateFromString(String dateString) throws ParseException {
+		SimpleDateFormat dateFormat =new SimpleDateFormat("MM/dd/yyyy");	
+		return dateFormat.parse(dateString);
 	}
 	
 	public static String getStudentGroupId(String age) {

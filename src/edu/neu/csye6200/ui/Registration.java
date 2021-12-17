@@ -1,5 +1,7 @@
 package edu.neu.csye6200.ui;
 
+import java.awt.HeadlessException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -12,6 +14,7 @@ import java.util.regex.Matcher;
 import com.toedter.calendar.JDateChooser;
 
 import edu.neu.csye6200.controller.RegistrationController;
+import edu.neu.csye6200.util.Helper;
 
 public class Registration extends javax.swing.JDialog{
 	
@@ -225,7 +228,8 @@ public class Registration extends javax.swing.JDialog{
     	
 //    	String regex = "^(.+)@(.+)$";
 //    	String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@\" \n"
-//    			+ "        + \"[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";    	
+//    			+ "        + \"[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+    	System.out.println(regDate.getDate());
     	Pattern pattern  = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     	Matcher matcher = pattern.matcher(email.getText());
     	
@@ -235,22 +239,32 @@ public class Registration extends javax.swing.JDialog{
     		JOptionPane.showMessageDialog(this, "Please enter all the fields", "ERROR!", JOptionPane.ERROR_MESSAGE);    		
     	} else if(!matcher.matches()) {
     		JOptionPane.showMessageDialog(this, "Please enter a valid email address", "ERROR!", JOptionPane.ERROR_MESSAGE);
-    	} else if(!controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
-			dob.getText(), address.getText(), "",
-			email.getText(), phone.getText(), regDate.getDateFormatString())) {
-    		JOptionPane.showMessageDialog(this, "An error occurred while enorlling the student", "ERROR!", JOptionPane.ERROR_MESSAGE);
-    	} else {    	    	    	            	    
-	    	JOptionPane.showMessageDialog(this, "Student enrolled successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
-	    	fName.setText("");
-	    	lName.setText("");
-	    	age.setText("");
-	    	dob.setText("");
-	    	address.setText("");
-	    	grdFName.setText("");
-	    	grdLName.setText("");
-	    	email.setText("");
-	    	phone.setText("");
-    	}
+    	} else
+			try {
+				if(!controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
+					Helper.getDateFromString(dob.getText()), address.getText(), grdFName.getText(),
+					email.getText(), phone.getText(), regDate.getDate())) {
+					JOptionPane.showMessageDialog(this, "An error occurred while enorlling the student", "ERROR!", JOptionPane.ERROR_MESSAGE);
+				} else {    	    	    	            	    
+					JOptionPane.showMessageDialog(this, "Student enrolled successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+					fName.setText("");
+					lName.setText("");
+					age.setText("");
+					dob.setText("");
+					address.setText("");
+					grdFName.setText("");
+					grdLName.setText("");
+					email.setText("");
+					phone.setText("");
+				}
+			} catch (HeadlessException e) {				
+				JOptionPane.showMessageDialog(this, "Please enter valid Date of Birth", "ERROR!", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(this, "Please enter valid Date of Birth", "ERROR!", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
     }
 
     private void fNameActionPerformed(java.awt.event.ActionEvent evt) {                                            

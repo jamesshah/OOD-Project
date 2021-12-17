@@ -27,8 +27,8 @@ public class RegistrationController {
 	UpdateResult update = null;
 	
 	@SuppressWarnings("deprecation")
-	public boolean enrollStudent(final String fName, final String lName, final String age, final String dob, 
-							final String address, final String grdName,final String email, final String phone, final String regDate) {
+	public boolean enrollStudent(final String fName, final String lName, final String age, final Date dob, 
+							final String address, final String grdName,final String email, final String phone, final Date regDate) {
 		
 //		Student student = (Student) StudentFactory.getInstance().getObject(fName, lName, Helper.getDateFromString(dob), Integer.parseInt(age), UUID.randomUUID().toString().replace("-", ""), Helper.getDateFromString(regDate), address, grdFName, email, phone, address);
 		
@@ -46,6 +46,7 @@ public class RegistrationController {
 				.append("guardianName", grdName)
 				.append("guardianEmail", email)
 				.append("guardianPhoneNumber", phone)
+				.append("registrationDate", regDate)
 				.append("group", group);
 						
 		InsertOneResult result = studentCollection.insertOne(student);
@@ -55,7 +56,8 @@ public class RegistrationController {
 			Document creds = 
 					new Document("username", randomStudentId)
 					.append("password", "pass@123")					
-					.append("id", randomStudentId);
+					.append("id", randomStudentId)
+					.append("role", "student");
 			InsertOneResult credsRes = credentialsCollection.insertOne(creds);
 		}
 		

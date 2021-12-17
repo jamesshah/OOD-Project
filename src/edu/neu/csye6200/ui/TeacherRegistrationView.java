@@ -1,5 +1,10 @@
 package edu.neu.csye6200.ui;
 
+import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
+
 import javax.swing.JOptionPane;
 
 import edu.neu.csye6200.controller.TeacherRegistrationController;
@@ -22,6 +27,7 @@ public class TeacherRegistrationView extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static TeacherRegistrationController controller = new TeacherRegistrationController();
+	private static LocalDate today = LocalDate.now();
 	
 	
 	/**
@@ -191,9 +197,15 @@ public class TeacherRegistrationView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     
 	private void clickedRegisterTeacher(java.awt.event.ActionEvent evt) {
+				
+		Date d = jDateChooser1.getDate();
+		LocalDate birthdate = LocalDate.of(d.getYear(), d.getMonth(), d.getDay());
+		
+		Period p = Period.between(birthdate, today);
+		System.out.println(p.getYears());
 	    	
-    	if(!controller.registerTeacher(firstNameTF.getText(), lastNameTF.getText(), "1", "07-18-2000",
-    			addressTF.getText(), emailTF.getText(), phoneNumberTF.getText(), "regDate")) {
+    	if(!controller.registerTeacher(firstNameTF.getText(), lastNameTF.getText(), p.getMonths()+"", jDateChooser1.getDate(),
+    			addressTF.getText(), emailTF.getText(), phoneNumberTF.getText(), new Date())) {
     		JOptionPane.showMessageDialog(this, "An error occurred while registering the teacher", "ERROR!", JOptionPane.ERROR_MESSAGE);
     	}
     	
@@ -226,6 +238,9 @@ public class TeacherRegistrationView extends javax.swing.JDialog {
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
+    	
+    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    	
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     /**
