@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
         loginLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
         usernameLbl = new javax.swing.JLabel();
-        passwordTF = new javax.swing.JTextField();
+        passwordTF = new javax.swing.JPasswordField();
         usernameTF = new javax.swing.JTextField();
         roleLbl = new javax.swing.JLabel();
         admin = new javax.swing.JRadioButton();
@@ -295,7 +295,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel title2Lbl;
     private javax.swing.JLabel loginLbl;
     private javax.swing.JLabel passwordLbl;
-    private javax.swing.JTextField passwordTF;
+    private javax.swing.JPasswordField passwordTF;
     private javax.swing.ButtonGroup roleGroup;
     private javax.swing.JLabel roleLbl;
     private javax.swing.JRadioButton student;
