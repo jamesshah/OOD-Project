@@ -221,7 +221,7 @@ public class Registration extends javax.swing.JFrame{
     private void clickedEnrollStudent(java.awt.event.ActionEvent evt) {
     	
     	if(!controller.enrollStudent(fName.getText(), lName.getText(), age.getText(),
-    			dob.getText(), address.getText(), grdFName.getText(), grdLName.getText(),
+    			dob.getText(), address.getText(), "",
     			email.getText(), phone.getText(), regDate.getDateFormatString())) {
     		JOptionPane.showMessageDialog(this, "An error occurred while enorlling the student", "ERROR!", JOptionPane.ERROR_MESSAGE);
     	}
@@ -268,7 +268,8 @@ public class Registration extends javax.swing.JFrame{
 
     private void regDateActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }
+    	
+    }    
 
 //    /**
 //     * @param args the command line arguments

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Updates;
 
 import edu.neu.csye6200.util.DBConn;
 
@@ -35,6 +36,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 //    	MongoCollection<Document> collection = DBConn.getInstance().getCollection("Credentials");
 //    	Document studentObj = collection.find(eq("id", "admin")).first();
     	this.studentObj = collection.find(eq("studentId", studentId)).first();
+    	collection.updateOne(eq("studentId", studentId), Updates.addToSet("students", "studentId"));
         initComponents();
     }
 
@@ -256,11 +258,11 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         email.setText(this.studentObj.get("guardianEmail").toString());
 
-        grdLName.setText(this.studentObj.get("guardianLastName").toString());
+        grdLName.setText(this.studentObj.get("guardianLastName", "").toString());
 
-        phone.setText(this.studentObj.get("guardianPhoneNumber").toString());
+        phone.setText(this.studentObj.get("guardianPhoneNumber", "").toString());
 
-        grdFName.setText(this.studentObj.get("guardianFirstName").toString());
+        grdFName.setText(this.studentObj.get("guardianFirstName", "").toString());
 
         grdDetailsLbl.setText("Guardian details:");
 
@@ -519,7 +521,7 @@ public class StudentLoginView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentLoginView("").setVisible(true);
+                new StudentLoginView("").setVisible(true);                
             }
         });
     }

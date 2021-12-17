@@ -1,4 +1,13 @@
 package edu.neu.csye6200.ui;
+
+import javax.swing.table.DefaultTableModel;
+
+import org.bson.Document;
+
+import com.mongodb.client.FindIterable;
+
+import edu.neu.csye6200.controller.StudentsController;
+
 /*
 
  * To change this license header, choose License Headers in Project Properties.
@@ -16,11 +25,16 @@ public class AllStudentsView extends javax.swing.JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private FindIterable<Document> students;
 	/**
      * Creates new form AllStudentsView
      */
-    public AllStudentsView() {
-        initComponents();
+    public AllStudentsView() {    	
+    	students = StudentsController.getStudents();
+//    	for(Document student: students) {
+//    		System.out.println(student.values());
+//    	}
+    	initComponents();        
     }
 
     /**
@@ -36,19 +50,13 @@ public class AllStudentsView extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);               
+        
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "First Name", "Last Name", "DoB", "Age", "Student ID", "Registration Date", "Address", "Guardian Name", "Guardian Email", "Guardian Phone Number", "Guardian Address"
-            }
-        ) {
+                new Object [][] {},
+                new String [] {
+                    "First Name", "Last Name", "DoB", "Age", "Student ID", "Registration Date", "Address", "Guardian Name", "Guardian Email", "Guardian Phone Number", "Guardian Address"
+               }) {
             /**
 			 * 
 			 */
@@ -68,6 +76,28 @@ public class AllStudentsView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        
+        for(Document student : students) {
+        	String fName = student.get("firstName").toString();
+        	String lName = student.get("lastName").toString();
+        	String dateOfBirth = student.get("dateOfBirth").toString();
+        	String age = student.get("age").toString();
+        	String studentId = student.get("studentId").toString();
+        	String registrationDate = student.get("registrationDate").toString();
+        	String address = student.get("address").toString();
+        	String guardianName = student.get("guardianName").toString();
+        	String guardianPhone = student.get("guardianPhoneNumber").toString();
+        	String guardianEmail = student.get("guardianEmail").toString();
+        	String guardianAddress = student.get("guardianAddress").toString();
+        	
+        	Object[] row = {fName, lName, dateOfBirth, age, studentId, registrationDate, address, guardianName, guardianEmail, guardianPhone, guardianAddress};
+        	tableModel.addRow(row);
+        
+        }
+        
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

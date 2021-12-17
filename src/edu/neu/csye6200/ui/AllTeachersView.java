@@ -6,16 +6,27 @@ package edu.neu.csye6200.ui;
  * and open the template in the editor.
  */
 
+import javax.swing.table.DefaultTableModel;
+
+import org.bson.Document;
+
+import com.mongodb.client.FindIterable;
+
+import edu.neu.csye6200.controller.TeachersController;
+
 /**
  *
  * @author jdsha
  */
 public class AllTeachersView extends javax.swing.JFrame {
 
+	
+	private FindIterable<Document> teachers;
     /**
      * Creates new form AllTeachersList
      */
     public AllTeachersView() {
+    	teachers = TeachersController.getTeachers();
         initComponents();
     }
 
@@ -38,12 +49,7 @@ public class AllTeachersView extends javax.swing.JFrame {
         jLabel1.setText("Teachers List");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "First Name", "Last Name", "DoB", "Age", "Employee ID", "Joining Date", "Address ", "Email Adress", "Phone Number ", "Credits"
             }
@@ -63,6 +69,26 @@ public class AllTeachersView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        
+        for(Document teacher : teachers) {
+        	String fName = teacher.get("firstName").toString();
+        	String lName = teacher.get("lastName").toString();        	
+        	String age = teacher.get("age").toString();
+        	String employeeId = teacher.get("employeeId").toString();        	
+        	String address = teacher.get("address").toString();        	
+        	String phoneNumber = teacher.get("phoneNumber").toString();
+        	String emailAddress = teacher.get("emailAddress").toString();
+        	String credits = teacher.get("credits").toString();        	
+        	
+        	Object[] row = {fName, lName, "", age, employeeId, "", address, emailAddress, phoneNumber, credits};
+        	tableModel.addRow(row);
+        
+        }
+        
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
