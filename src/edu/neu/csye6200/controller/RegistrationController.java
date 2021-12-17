@@ -56,7 +56,7 @@ public class RegistrationController {
 		System.out.println(result.getInsertedId().toString());
 		
 		
-		return result.wasAcknowledged() && update.wasAcknowledged();
+		return result.wasAcknowledged();
 	}
 
 }
