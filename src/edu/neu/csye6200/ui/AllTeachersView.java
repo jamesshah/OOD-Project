@@ -6,6 +6,8 @@ package edu.neu.csye6200.ui;
  * and open the template in the editor.
  */
 
+import java.util.Date;
+
 import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
@@ -78,13 +80,15 @@ public class AllTeachersView extends javax.swing.JDialog {
         	String fName = teacher.get("firstName").toString();
         	String lName = teacher.get("lastName").toString();        	
         	String age = teacher.get("age").toString();
+        	String dob = teacher.get("dateOfBirth", new Date(0)).toString();
         	String employeeId = teacher.get("employeeId").toString();
         	String address = teacher.get("address").toString();        	
         	String phoneNumber = teacher.get("phoneNumber").toString();
         	String emailAddress = teacher.get("emailAddress").toString();
+        	String regDate = teacher.get("registrationDate", new Date(0)).toString();
         	String credits = teacher.get("credits").toString();        	
         	
-        	Object[] row = {fName, lName, "", age, employeeId, "", address, emailAddress, phoneNumber, credits};
+        	Object[] row = {fName, lName, dob, age, employeeId, regDate, address, emailAddress, phoneNumber, credits};
         	tableModel.addRow(row);
         
         }

@@ -261,7 +261,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 
       regDateLbl.setText("Registration date:");
 
-      regDate.setText(this.studentObj.get("registrationDate", "").toString());
+      regDate.setText(this.studentObj.get("registrationDate", new Date(0)).toString());
 
       email.setText(this.studentObj.get("guardianEmail").toString());
       
@@ -394,9 +394,7 @@ public class StudentLoginView extends javax.swing.JFrame {
         
         ArrayList<String> studentsId = (ArrayList<String>) doc.get("students");
                 
-        for(String id: studentsId) {        	
-//        	System.out.println(id);
-//        	System.out.println(studentObj.get("studentId"));
+        for(String id: studentsId) {
         	if(id.equals(studentObj.get("studentId"))) 
         		continue;
         	Document studentsDoc = collection.find(eq("studentId", id)).first();
@@ -557,7 +555,7 @@ public class StudentLoginView extends javax.swing.JFrame {
     private JLabel deadlinesLbl;
     private JLabel titleLbl1;
     private JLabel titleLbl2;
-    private JLabel studentID;
+    private JLabel studentID; 
     private JLabel firstName;
     private JLabel lastName;
     private JLabel dob;

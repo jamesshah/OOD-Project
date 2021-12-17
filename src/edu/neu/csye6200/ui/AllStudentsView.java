@@ -1,5 +1,7 @@
 package edu.neu.csye6200.ui;
 
+import java.util.Date;
+
 import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
@@ -83,10 +85,10 @@ public class AllStudentsView extends javax.swing.JDialog {
         for(Document student : students) {
         	String fName = student.get("firstName", "").toString();
         	String lName = student.get("lastName", "").toString();
-        	String dateOfBirth = student.get("dateOfBirth", "").toString();
+        	String dateOfBirth = student.get("dateOfBirth", new Date(0)).toString();
         	String age = student.get("age", 0).toString();
         	String studentId = student.get("studentId", "").toString();
-        	String registrationDate = student.get("registrationDate", "").toString();
+        	String registrationDate = student.get("registrationDate", new Date(0)).toString();
         	String address = student.get("address", "").toString();
         	String guardianName = student.get("guardianName", "").toString();
         	String guardianPhone = student.get("guardianPhoneNumber", "").toString();

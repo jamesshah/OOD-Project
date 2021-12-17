@@ -344,17 +344,19 @@ public class TeacherLoginView extends javax.swing.JFrame {
         
         DefaultTableModel table = (DefaultTableModel) studentTable.getModel();
         
-        Document doc = groupsCollection.find(eq("teacher", teacherObj.get("employeeId", ""))).first();
-        	                       
-        ArrayList<String> studentsId = (ArrayList<String>) doc.get("students");
-        
-        System.out.println(doc.get("students"));
-        for(String id: studentsId) {
-        	Document studentsDoc = studentsCollection.find(eq("studentId", id)).first();
-        	String student[] = {studentsDoc.get("firstName", ""), studentsDoc.get("lastName", "")};
-        	table.addRow(student);
+        if(teacherObj.get("employeeId","").toString().equals("testTeacher")) {
+        	Document doc = groupsCollection.find(eq("teacher", teacherObj.get("employeeId", ""))).first();
+            
+            ArrayList<String> studentsId = (ArrayList<String>) doc.get("students");
+            
+            System.out.println(doc.get("students"));
+            for(String id: studentsId) {
+            	Document studentsDoc = studentsCollection.find(eq("studentId", id)).first();
+            	String student[] = {studentsDoc.get("firstName", ""), studentsDoc.get("lastName", "")};
+            	table.addRow(student);
+            }
         }
-        
+                
         jScrollPane1.setViewportView(studentTable);
 
         clsRoomLbl.setText("Classroom:");
