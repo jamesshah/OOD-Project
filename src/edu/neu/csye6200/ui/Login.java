@@ -243,6 +243,9 @@ public class Login extends javax.swing.JFrame {
     		
     		if(!(teacherObj == null) && passwordTF.getText().equals(teacherObj.get("password"))) {    			
 				System.out.println("Teacher access granted!");
+				JFrame o = new TeacherLoginView(teacherObj.get("id").toString());
+    			o.setVisible(true);
+    			dispose();
     		} else {
     			JOptionPane.showMessageDialog(this, "Username/password is incorrect", "ERROR!", JOptionPane.ERROR_MESSAGE);
     		}
