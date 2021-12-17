@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
 
@@ -366,10 +368,7 @@ public class StudentLoginView extends javax.swing.JFrame {
         jTabbedPane1.addTab("Account Info", accInfoPanel);
 
         classmatesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "First Name", "Last Name"
             }
@@ -389,6 +388,22 @@ public class StudentLoginView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        DefaultTableModel table = (DefaultTableModel) classmatesTable.getModel();
+        Document doc = groupsCollection.find(eq("id", studentObj.get("group", ""))).first();
+        
+        ArrayList<String> studentsId = (ArrayList<String>) doc.get("students");
+                
+        for(String id: studentsId) {        	
+//        	System.out.println(id);
+//        	System.out.println(studentObj.get("studentId"));
+        	if(id.equals(studentObj.get("studentId"))) 
+        		continue;
+        	Document studentsDoc = collection.find(eq("studentId", id)).first();
+        	String student[] = {studentsDoc.get("firstName", ""), studentsDoc.get("lastName", "")};
+        	table.addRow(student);
+        }
+        
         jScrollPane1.setViewportView(classmatesTable);
 
         clsRoomLbl.setText("Classroom:");
