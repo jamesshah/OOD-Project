@@ -15,7 +15,7 @@ import edu.neu.csye6200.controller.TeacherRegistrationController;
  *
  * @author jdsha
  */
-public class TeacherRegistrationView extends javax.swing.JFrame {
+public class TeacherRegistrationView extends javax.swing.JDialog {
 
     /**
 	 * 
@@ -56,7 +56,7 @@ public class TeacherRegistrationView extends javax.swing.JFrame {
         cancelBtn = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Teacher Registration");

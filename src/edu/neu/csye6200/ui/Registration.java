@@ -13,7 +13,7 @@ import com.toedter.calendar.JDateChooser;
 
 import edu.neu.csye6200.controller.RegistrationController;
 
-public class Registration extends javax.swing.JFrame{
+public class Registration extends javax.swing.JDialog{
 	
 	/**
 	 * 
@@ -51,7 +51,7 @@ public class Registration extends javax.swing.JFrame{
         phone = new JTextField();
         regDate = new JDateChooser(new Date());
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pre-school Day Care");
 
         titleLbl.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
