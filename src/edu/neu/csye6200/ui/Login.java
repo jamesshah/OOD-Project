@@ -39,8 +39,16 @@ public class Login extends javax.swing.JFrame {
         student = new javax.swing.JRadioButton();
         teacher = new javax.swing.JRadioButton();
         loginBtn = new javax.swing.JButton();
+        title1Lbl = new javax.swing.JLabel();
+        title2Lbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
+        title1Lbl.setFont(new java.awt.Font("Marker Felt", 0, 28)); // NOI18N
+        title1Lbl.setText("DAY CARE");
+
+        title2Lbl.setFont(new java.awt.Font("Bradley Hand", 1, 28)); // NOI18N
+        title2Lbl.setText("PRE-SCHOOL");
 
         loginLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         loginLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,6 +115,11 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            		.addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(title2Lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(title1Lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,6 +152,10 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
+                .addComponent(title2Lbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(title1Lbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -271,6 +288,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton admin;
     private javax.swing.JButton loginBtn;
+    private javax.swing.JLabel title1Lbl;
+    private javax.swing.JLabel title2Lbl;
     private javax.swing.JLabel loginLbl;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JTextField passwordTF;
