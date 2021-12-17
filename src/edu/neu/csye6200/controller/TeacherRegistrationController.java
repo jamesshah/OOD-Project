@@ -19,18 +19,19 @@ public class TeacherRegistrationController {
 							final String address, final String email, final String phone, final String regDate) {
 		
 //		Student student = (Student) StudentFactory.getInstance().getObject(fName, lName, Helper.getDateFromString(dob), Integer.parseInt(age), UUID.randomUUID().toString().replace("-", ""), Helper.getDateFromString(regDate), address, grdFName, email, phone, address);
-		
-		Document student = 
+				
+		Document teacher = 
 				new Document("firstName", fName)
 				.append("lastName", lName)
 				.append("age", Integer.parseInt(age))
-				.append("studentId", UUID.randomUUID().toString())				
+				.append("employeeId", UUID.randomUUID().toString())
 				.append("address", address)								
-				.append("guardianEmail", email)
-				.append("guardianPhoneNumber", phone);				
+				.append("emailAddress", email)
+				.append("phoneNumber", phone)
+				.append("credits", 0);
 				
 		
-		InsertOneResult result = collection.insertOne(student);
+		InsertOneResult result = collection.insertOne(teacher);
 					
 //		System.out.println("Enrolled : " + student);
 		System.out.println(result.getInsertedId().toString());

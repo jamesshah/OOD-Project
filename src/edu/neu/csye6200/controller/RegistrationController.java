@@ -23,6 +23,7 @@ public class RegistrationController {
 	SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 	MongoCollection<Document> studentCollection = DBConn.getInstance().getCollection("Students");
 	MongoCollection<Document> groupsCollection = DBConn.getInstance().getCollection("Groups");
+	MongoCollection<Document> credentialsCollection = DBConn.getInstance().getCollection("Credentials");
 	UpdateResult update = null;
 	
 	@SuppressWarnings("deprecation")
@@ -51,8 +52,14 @@ public class RegistrationController {
 		
 		if(result.wasAcknowledged()) {
 			UpdateResult update = groupsCollection.updateOne(eq("id", group), Updates.addToSet("students", randomStudentId));
+			Document creds = 
+					new Document("username", randomStudentId)
+					.append("password", "pass@123")					
+					.append("id", randomStudentId);
+			InsertOneResult credsRes = credentialsCollection.insertOne(creds);
 		}
-					
+		
+		
 		System.out.println(result.getInsertedId().toString());
 		
 		

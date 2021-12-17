@@ -35,7 +35,9 @@ import edu.neu.csye6200.util.DBConn;
 public class StudentLoginView extends javax.swing.JFrame {
 	
 	private MongoCollection<Document> collection = DBConn.getInstance().getCollection("Students");
-	private Document studentObj; 
+	private MongoCollection<Document> groupsCollection = DBConn.getInstance().getCollection("Groups");
+	private Document studentObj;
+	private Document groupObj;
 
     /**
      * Creates new form StudentLoginView
@@ -44,6 +46,7 @@ public class StudentLoginView extends javax.swing.JFrame {
 //    	MongoCollection<Document> collection = DBConn.getInstance().getCollection("Credentials");
 //    	Document studentObj = collection.find(eq("id", "admin")).first();
     	this.studentObj = collection.find(eq("studentId", studentId)).first();
+    	this.groupObj = groupsCollection.find(eq("id", studentObj.get("group"))).first();
     	collection.updateOne(eq("studentId", studentId), Updates.addToSet("students", "studentId"));
         initComponents();
     }
@@ -224,45 +227,45 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
 
-        studentIDLbl.setText("StudentID:");
+      studentIDLbl.setText("StudentID:");
 
-        firstNameLbl.setText("First Name:");
+      firstNameLbl.setText("First Name:");
 
-        lastNameLbl.setText("Last Name:");
+      lastNameLbl.setText("Last Name:");
 
-        dobLbl.setText("Date of Birth:");
+      dobLbl.setText("Date of Birth:");
 
-        ageLbl.setText("Age:");
+      ageLbl.setText("Age:");
 
-        addressLbl.setText("Address:");
+      addressLbl.setText("Address:");
 
-        studentID.setText(this.studentObj.get("studentId").toString());
+      studentID.setText(this.studentObj.get("studentId").toString());
 
-        firstName.setText(this.studentObj.get("firstName").toString());
+      firstName.setText(this.studentObj.get("firstName").toString());
 
-        lastName.setText(this.studentObj.get("lastName").toString());
+      lastName.setText(this.studentObj.get("lastName").toString());
 
-        dob.setText(this.studentObj.get("firstName").toString());
+      dob.setText(this.studentObj.get("dateOfBirth", "").toString());
 
-        age.setText(this.studentObj.get("age").toString());
+      age.setText(this.studentObj.get("age").toString());
 
-        address.setText(this.studentObj.get("age").toString());
+      address.setText(this.studentObj.get("age").toString());
 
-        grdFNameLbl.setText("Guardian Name:");
+      grdFNameLbl.setText("Guardian First Name:");
 
-        emailLbl.setText("Email:");
+      emailLbl.setText("Email:");
 
-        phoneLbl.setText("Phone:");
+      phoneLbl.setText("Phone:");
 
-        regDateLbl.setText("Registration date:");
+      regDateLbl.setText("Registration date:");
 
-        regDate.setText(this.studentObj.get("registrationDate").toString());
+      regDate.setText(this.studentObj.get("registrationDate", "").toString());
 
-        email.setText(this.studentObj.get("guardianEmail").toString());
+      email.setText(this.studentObj.get("guardianEmail").toString());
+      
+      phone.setText(this.studentObj.get("guardianPhoneNumber", "").toString());
 
-        phone.setText(this.studentObj.get("guardianPhoneNumber", "").toString());
-
-        grdFName.setText(this.studentObj.get("guardianName", "").toString());
+      grdFName.setText(this.studentObj.get("guardianFirstName", "").toString());
 
         GroupLayout accInfoPanelLayout = new GroupLayout(accInfoPanel);
         accInfoPanel.setLayout(accInfoPanelLayout);
@@ -390,11 +393,11 @@ public class StudentLoginView extends javax.swing.JFrame {
 
         clsRoomLbl.setText("Classroom:");
 
-        clsRoom.setText("clsRoom");
+        clsRoom.setText(this.studentObj.get("group", ""));
 
         teacherLbl.setText("Teacher:");
 
-        teacher.setText("teacher");
+        teacher.setText(this.groupObj.get("teacher", ""));
 
         clsmatesLbl.setText("Classmates:");
 
