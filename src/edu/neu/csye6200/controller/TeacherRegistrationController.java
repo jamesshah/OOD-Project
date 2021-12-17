@@ -24,7 +24,7 @@ public class TeacherRegistrationController {
 				new Document("firstName", fName)
 				.append("lastName", lName)
 				.append("age", Integer.parseInt(age))
-				.append("employeeId", UUID.randomUUID().toString())
+				.append("employeeId", "teacher" + UUID.randomUUID().toString())
 				.append("address", address)								
 				.append("emailAddress", email)
 				.append("phoneNumber", phone)
